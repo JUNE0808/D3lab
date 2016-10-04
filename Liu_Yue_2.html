@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <style>
+            h1 {
+                color: white;
+                background-color: black;
+                margin-bottom:0;                
+                padding: 3;
+            }            
+                                   
+        </style>        
+    </head>
+    
+    <body style="margin: 0">
+        <h1>Gapiminder - Wealth and Health of Nations</h1>
+        
+        <div style="padding: 10">
+            <h2>Countries</h2>
+            <div id="list", style="line-height:24px"></div>                                      
+        </div> 
+    </body>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>   
+    
+    <script>
+        var list = d3.select("#list");
+        var numbers = [1,2,5,8,6];
+        
+        d3.json("https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json", function(error, result){
+            numbers = result;
+            render();
+        })
+              
+        function render() {
+            var changes = list.selectAll("div")
+                .data(numbers, function(d) { return d.name });
+            
+            changes.enter()
+                .append("div")
+                .text(function(d) {return d.name});                        
+        }
+        
+    </script>
+</html>
